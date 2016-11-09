@@ -72,6 +72,8 @@ angular.module('ngCsv.directives').
             $element.addClass($attrs.ngCsvLoadingClass || 'ng-csv-loading');
 
             CSV.stringify($scope.data(), getBuildCsvOptions()).then(function (csv) {
+              var charset = scope.charset || "utf-8";
+              csv = new TextEncoder(charset, {NONSTANDARD_allowLegacyEncoding: true}).encode(csv);
               $scope.csv = csv;
               $element.removeClass($attrs.ngCsvLoadingClass || 'ng-csv-loading');
               deferred.resolve(csv);
