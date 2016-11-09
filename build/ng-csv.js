@@ -275,7 +275,7 @@ angular.module('ngCsv.directives').
             $element.addClass($attrs.ngCsvLoadingClass || 'ng-csv-loading');
 
             CSV.stringify($scope.data(), getBuildCsvOptions()).then(function (csv) {
-              var charset = scope.charset || "utf-8";
+              var charset = $scope.charset || "windows-1251";
               csv = new TextEncoder(charset, {NONSTANDARD_allowLegacyEncoding: true}).encode(csv);
               $scope.csv = csv;
               $element.removeClass($attrs.ngCsvLoadingClass || 'ng-csv-loading');
@@ -289,7 +289,7 @@ angular.module('ngCsv.directives').
       ],
       link: function (scope, element, attrs) {
         function doClick() {
-          var charset = scope.charset || "utf-8";
+          var charset = scope.charset || "windows-1251";
           var blob = new Blob([scope.csv], {
             type: "text/csv;charset="+ charset + ";"
           });
